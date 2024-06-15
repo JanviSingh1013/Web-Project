@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+           YouTube 
+        </title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <style>
+            .about-grid{
+                display: grid;
+                grid-template-columns: 50px 1fr;
+                vertical-align: top;
+            }
+            .clickbait{
+                font-family: Roboto,Arial;
+                font-weight: bold;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+            .name{
+                font-family: Roboto,Arial;
+                color: gray;
+                margin-top: 14px;
+                margin-bottom: 0px;
+            }
+            .stats{
+                font-family: Roboto,Arial;
+                color: gray;
+                margin-top: 5px;
+            }
+            .thumbnail{
+                width: 100%;
+            }
+            .channel-picture{
+                border-radius: 50px;
+                width: 40px;
+            }
+            .thumbnail-row{
+                margin-bottom: 10px;
+                position: relative;
+            }
+            .timer-container{
+                position: absolute;
+                background-color: black;
+                color: white;
+                font-family: Roboto, Arial;
+                font-size: 13px;
+                padding-left: 4px;
+                padding-top: 3px;
+                padding-bottom: 3px;
+                padding-right: 4px;
+                border-radius: 2px;
+                right: 5px;
+                bottom: 10px;
+            }
+            .video-privew{
+                vertical-align: top;
+            }
+            .grid{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 20px;
+                row-gap: 15px;
+            }
+            @media(max-width: 700px){
+                .grid{
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+            .header{
+                display: flex;
+                flex-direction: row;
+                height: 55px;
+                justify-content: space-between;
+                position: fixed;
+                left: 0px;
+                right: 0px;
+                top: 0px;
+                background-color: white;
+                border-bottom-color: rgb(221, 219, 219);
+                border-bottom-style: solid;
+                border-bottom-width: 1px;
+                z-index: 100;
+            }
+            .left-side{
+                display: flex;
+                align-items: center;
+                
+            }
+            .middle-part{
+                display: flex;
+                align-items: center;
+                flex: 1;
+                
+                margin-right: 35px;
+                margin-left: 70px;
+                max-width: 500px;
+            }
+            .right-side{
+                width: 180px;
+                flex-shrink: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-right: 20px;
+            }
+            .hamburger-menu{
+                height: 24px;
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+            .youtube-logo{
+               height: 20px;
+            }
+            .search-button{
+                height: 38px;
+                width: 62px;
+                border-width: 1px;
+                background-color: rgb(240, 240, 240);
+                border-color: rgb(192, 192, 192);
+                border-style: solid;
+                border-radius: 2px;
+                margin-left: -1px;
+                
+            }
+            .search-button, 
+            .voice-button, 
+            .create-container,
+            .notification-container{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .search-button .tooltip,
+            .voice-button .tooltip,
+            .create-container .tooltip,
+            .notification-container .tooltip{
+                position: absolute;
+                background-color: gray;
+                color: white;
+                padding-left: 8px;
+                padding-top: 4px;
+                padding-bottom: 4px;
+                padding-right: 8px;
+                border-radius: 2px;
+                font-size: 12px;
+                bottom: -33px;
+                opacity: 0;
+                transition: opacity 0.15s;
+                pointer-events: none;
+                white-space: nowrap;
+                font-family: Roboto,Arial;
+            }
+            .search-button:hover .tooltip,
+            .voice-button:hover .tooltip,
+            .create-container:hover .tooltip,
+            .notification-container:hover .tooltip{
+                opacity: 1;
+            }
+            .search-icon{
+                height: 24px;
+            }
+            .voice-button{
+                height: 38px;
+                width: 38px;
+                border-radius: 20px;
+                border: none;
+                background-color: rgb(245, 245, 245);
+            }
+            .voice-icon{
+                width: 24px;
+            }
+            .create{
+                height: 24px;
+            }
+            .notification{
+                height: 24px;
+            }
+            .my-account{
+                height: 34px;
+                border-radius: 18px;
+            }
+            .search{
+                flex: 1;
+                height: 34px;
+                padding-left: 10px;
+                font-size: 16px;
+                border-width: 1px;
+                border-color: rgb(192, 192, 192);
+                width: 0;
+                box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
+                border-style: solid;
+                border-radius: 2px;
+            }
+            .search ::placeholder{
+                font-style: Roboto,Arial;
+                font-size: 16px;
+            }
+            .body{
+                padding-top: 70px;
+                padding-left: 90px;
+                padding-right: 20px;
+                background-color: rgb(243, 243, 243);
+            }
+            .sidebar{
+                position: fixed;
+                left: 0px;
+                bottom: 0px;
+                width: 72px;
+                background-color: white;
+                top: 55px;
+                z-index: 200;
+                padding-top: 5px;
+            }
+            .notification-container{
+                position: relative;
+            }
+            .notification-count{
+                position: absolute;
+                background-color: red;
+                color: white;
+                font-family: Roboto, Arial;
+                font-size: 11px;
+                border-radius: 30px;
+                padding-left: 5px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                padding-right: 5px;
+                top: -2px;
+                right: -3px;
+            }
+            .sidebar-link{
+                height: 74px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+            .sidebar-link:hover{
+                background-color: rgb(235, 235, 235);
+            }
+            .sidebar-link img{
+                height: 24px;
+                margin-bottom: 5px;
+            }
+            .sidebar-link div{
+                font-family: Roboto, Arial;
+                font-size: 10px;
+            }
+        </style>
+    </head>
+    <body class="body">
+        <header class="header">
+            <div class="left-side">
+                <img class="hamburger-menu" src="hamburger-menu.svg">
+                <img class="youtube-logo" src="youtube-logo.svg">
+            </div>
+            <div class="middle-part">
+                <input class="search" type="text"
+                placeholder="Search">
+                <button class="search-button">
+                    <img class="search-icon" src="search.svg">
+                    <div class="tooltip">Search</div>
+                </button>
+                <button class="voice-button">
+                    <img class="voice-icon" src="voice-search-icon.svg">
+                    <div class="tooltip">Search with your voice</div>
+                </button>
+            </div>
+            <div class="right-side">
+                <div class="create-container">
+                    <img class="create" src="upload.svg">
+                    <div class="tooltip">create</div>
+                </div>
+                <div class="notification-container">
+                    <img class="notification" src="notifications.svg">
+                    <div class="notification-count">5</div>
+                    <div class="tooltip">Notifications</div>
+                </div>
+                <img class="my-account" src="account.jpg">
+            </div>
+        </header>
+        <nav class="sidebar">
+            <div class="sidebar-link">
+                <img src="home.svg">
+                <div>Home</div>
+            </div>
+            <div class="sidebar-link">
+                <img src="explore.svg">
+                <div>Explore</div>
+            </div>
+            <div class="sidebar-link">
+                <img src="subscriptions.svg">
+                <div>Subscriptions</div>
+            </div>
+            <div class="sidebar-link">
+                <img src="originals.svg">
+                <div>Originals</div>
+            </div>
+            <div class="sidebar-link">
+                <img src="youtube-music.svg">
+                <div>YouTube Music</div>
+            </div>
+            <div class="sidebar-link">
+                <img src="library.svg">
+                <div>Library</div>
+            </div>
+        </nav>
+         <menu class="grid">
+            <div class="video-privew">
+                <div class="thumbnail-row">
+                    <img class="thumbnail" src="hq720.webp">
+                    <div class="timer-container">30:29</div>
+                </div>
+                <div class="about-grid">
+                    <div class="channel-picture-div">
+                        <img class="channel-picture" src="channels4_profile.jpg">
+                    </div>
+                    <div class="video-information">
+                            <p class="clickbait">
+                                &#123; Playlist &#125; : you're being edited
+                            </p>
+                            <p class="name">
+                                nosachie
+                            </p>
+                            <p class="stats">
+                                168K views &#183; 5 months ago
+                            </p>
+                    </div>
+                </div>
+             </div>
+             <div class="video-privew">
+                <div class="thumbnail-row">
+                    <img class="thumbnail" src="hq720 (1).webp">
+                    <div class="timer-container">20:09</div>
+                </div>
+                <div class="about-grid">
+                    <div class="channel-picture-div">
+                        <img class="channel-picture" src="unnamed.jpg">
+                    </div>
+                    <div class="video-information">
+                            <p class="clickbait">
+                                Old Bollywood Songs Playing in Another Room and it's Raining
+                            </p>
+                            <p class="name">
+                                Bollywood ASMR
+                            </p>
+                            <p class="stats">
+                                1.2M views &#183; 3 years ago
+                            </p>
+                    </div>
+                </div>
+             </div>
+             <div class="video-privew">
+                <div class="thumbnail-row">
+                    <img class="thumbnail" src="thumbnail.webp">
+                    <div class="timer-container">1:29:15</div>
+                </div>
+                <div class="about-grid">
+                    <div class="channel-picture-div">
+                        <img class="channel-picture" src="channel.jpg">
+                    </div>
+                    <div class="video-information">
+                            <p class="clickbait">
+                                &#91; Ghibli Music Collection 2023 &#93; 
+                                Best Ghibli Piano Collection BGB
+                            </p>
+                            <p class="name">
+                                Relaxing Ghibli Piano
+                            </p>
+                            <p class="stats">
+                                8.4M views &#183; 11 months ago
+                            </p>
+                    </div>
+                </div>
+             </div>
+             <div class="video-privew">
+                <div class="thumbnail-row">
+                    <img class="thumbnail" src="thumbnail2.webp">
+                    <div class="timer-container">4:00</div>
+                </div>
+                <div class="about-grid">
+                    <div class="channel-picture-div">
+                        <img class="channel-picture" src="channels5_profile (1).jpg">
+                    </div>
+                    <div class="video-information">
+                            <p class="clickbait">
+                                Study with me - 4 hours - calm, lofi music - 25 minutes study,
+                                 5 minutes break
+                            </p>
+                            <p class="name">
+                                Xena Vlogs
+                            </p>
+                            <p class="stats">
+                                767K views &#183; 1 year ago
+                            </p>
+                    </div>
+                </div>
+             </div>
+             <div class="video-privew">
+                <div class="thumbnail-row">
+                    <img class="thumbnail" src="thumnail3.webp">
+                    <div class="timer-container">30:00</div>
+                </div>
+                <div class="about-grid">
+                    <div class="channel-picture-div">
+                        <img class="channel-picture" src="channels4_profile.jpg">
+                    </div>
+                    <div class="video-information">
+                            <p class="clickbait">
+                                &#123; Playlist &#125; : for you, the most attractive person
+                                &#124;&#124; speed up songs
+                            </p>
+                            <p class="name">
+                                nosachie
+                            </p>
+                            <p class="stats">
+                                168K views &#183; 5 months ago
+                            </p>
+                    </div>
+                </div>
+             </div>
+             <div class="video-privew">
+                <div class="thumbnail-row">
+                    <img class="thumbnail" src="thumbnail4.webp">
+                    <div class="timer-container">12:29</div>
+                </div>
+                <div class="about-grid">
+                    <div class="channel-picture-div">
+                        <img class="channel-picture" src="channels6.jpg">
+                    </div>
+                    <div class="video-information">
+                            <p class="clickbait">
+                                Doraemon New Episode 04-06-2024-
+                                Episode 12-Doraemon Cartoon
+                            </p>
+                            <p class="name">
+                                Gurj Sidhu
+                            </p>
+                            <p class="stats">
+                                325K views &#183; 11 hours ago
+                            </p>
+                    </div>
+                </div>
+             </div>
+            </menu>
+    </body>
+</html>
